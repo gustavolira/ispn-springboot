@@ -21,15 +21,28 @@ public class HelloWorld {
         configurationBuilder.persistence().addStore(JdbcStringBasedStoreConfigurationBuilder.class)
                 .table()
                 .tableNamePrefix("cache")
-                .idColumnType("VARCHAR(255)").idColumnName("id")
-                .dataColumnType("BYTEA").dataColumnName("data")
-                .timestampColumnName("ts").timestampColumnType("BIGINT")
-                .connectionPool()
-                .connectionUrl("jdbc:postgresql://localhost:5432/example")
-                .driverClass("org.postgresql.Driver")
-                .username("gustavo")
-                .password("123456")
-                .segmented(false);
+
+                //FOR ORACLE
+                .idColumnType("VARCHAR2(255)").idColumnName("id")
+                .dataColumnType("RAW(1000)").dataColumnName("data")
+                .timestampColumnName("ts").timestampColumnType("NUMBER")
+
+                //FOR POSTGRES
+//                .idColumnType("VARCHAR(255)").idColumnName("id")
+//                .dataColumnType("BYTEA").dataColumnName("data")
+//                .timestampColumnName("ts").timestampColumnType("BIGINT")
+
+                .segmented(false)
+                .dataSource()
+                .jndiUrl("java:/PostGreDS");
+
+        //FOR CONNECTION POOL INSTEAD OF USE JNDI
+//                .connectionPool()
+//                .connectionUrl("jdbc:postgresql://localhost:5432/example")
+//                .driverClass("org.postgresql.Driver")
+//                .username("gustavo")
+//                .password("123456")
+
 
         Cache<String, String> cache = cacheManager
                 .administration()

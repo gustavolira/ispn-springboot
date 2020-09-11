@@ -50,6 +50,11 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc10</artifactId>
+            <version>19.7.0.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.infinispan</groupId>
             <artifactId>infinispan-core</artifactId>
             <version>${version.infinispan}</version>
@@ -84,6 +89,7 @@
     </dependencies>
 
     <build>
+
         <finalName>datagrid</finalName>
         <plugins>
             <plugin>
@@ -94,6 +100,14 @@
                 <groupId>org.wildfly.plugins</groupId>
                 <artifactId>wildfly-maven-plugin</artifactId>
                 <version>2.0.2.Final</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
             </plugin>
         </plugins>
     </build>
